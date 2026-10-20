@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>SPX LEARN</title>
+<style>
+:root{--bg1:#05080f;--bg2:#0b3a5c;--sky:#4fc3f7;--tx:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html,body{height:100%;margin:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:linear-gradient(160deg,#05080f,#0b3a5c 60%,#1e88c8);color:var(--tx);overflow:hidden}
+#app{height:100%;overflow-y:auto;padding:56px 14px 20px;text-align:center}
+.intro{background:#000;position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:50}
+h1{font-size:44px;letter-spacing:3px;margin:0 0 24px;color:var(--sky);text-shadow:0 0 20px var(--sky)}
+.bar{width:70%;max-width:320px;height:14px;background:#222;border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,red,orange,yellow,lime,cyan,blue,violet)}
+button{font:inherit;font-weight:700;border:0;border-radius:14px;padding:12px 20px;margin:6px;background:var(--sky);color:#04263d;cursor:pointer;box-shadow:0 4px 0 #1b7fb0}
+button:active{transform:translateY(3px);box-shadow:none}
+input{font:inherit;padding:12px;border-radius:12px;border:2px solid var(--sky);background:#06223a;color:#fff;width:90%;max-width:320px;margin:6px}
+.card{background:#0a2a44cc;border:2px solid #4fc3f755;border-radius:20px;padding:16px;max-width:380px;margin:12px auto}
+.star{width:90px;height:90px;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);background:var(--sky);object-fit:cover;display:inline-flex;align-items:center;justify-content:center;font-size:38px}
+#menu{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));left:8px;z-index:20;width:38px;height:38px;padding:0;font-size:18px;border-radius:50%;display:none}
+.ov{position:fixed;inset:0;background:#000a;z-index:60;display:flex;align-items:center;justify-content:center}
+.pp{background:#0b3a5c;border:3px solid var(--sky);border-radius:22px;padding:22px;width:84%;max-width:340px}
+.emo{font-size:64px}
+.hud{display:flex;justify-content:center;gap:14px;font-weight:700;margin-bottom:8px}
+.big{display:block;width:80%;max-width:280px;margin:14px auto;font-size:22px;padding:16px}
+.node{width:62px;height:62px;border-radius:50%;margin:10px 0;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;position:relative;background:#14507a;border:3px solid var(--sky);cursor:pointer}
+.node.done{background:#2e9e5b}.node.lock{background:#333;border-color:#555;opacity:.7}.node.cur{background:#f5b301;color:#222}
+.node small{position:absolute;bottom:-4px;right:-4px;font-size:16px}
+.king{position:absolute;top:-34px;font-size:34px;animation:jmp .8s ease-in-out infinite}
+@keyframes jmp{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+#ar{position:relative;height:calc(100vh - 150px);min-height:340px;border:2px solid var(--sky);border-radius:16px;background:#071a2b;overflow:hidden}
+.en{position:absolute;transform:translateX(-50%);font-size:30px}
+.en b{display:block;background:#fff;color:#c0182c;border-radius:8px;font-size:16px;padding:1px 6px}
+.en b u{color:#1a9b3a;text-decoration:none}
+.fix{position:absolute;left:50%;transform:translateX(-50%);font-size:44px}
+.dag{position:absolute;font-size:22px;transition:all .25s linear}
+.pack{display:flex;justify-content:space-between;align-items:center;margin:10px 0;font-weight:700}
+
+#ti{}
+#ar{position:relative;height:calc(100vh - 175px);min-height:400px;max-width:520px;margin:0 auto;border:3px solid #3b3550;border-radius:10px;overflow:hidden;background:linear-gradient(#0003,#0003),repeating-linear-gradient(0deg,#0000 0 27px,#0006 27px 29px),repeating-linear-gradient(90deg,#0000 0 55px,#0006 55px 57px),#3a3744}
+#ar.shk{animation:shk .35s}@keyframes shk{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.wall{position:absolute;top:0;left:0;right:0;height:17%;background:#1f1d28;border-bottom:4px solid #12101a}
+.torch{position:absolute;font-size:22px;animation:fl .5s infinite alternate}@keyframes fl{to{transform:scale(1.15)}}
+.boss{position:absolute;top:2%;left:50%;transform:translateX(-50%);font-size:60px}
+.ring{position:absolute;left:50%;top:38%;width:84%;height:36%;transform:translate(-50%,-50%);border:3px solid #8a7a5a55;border-radius:50%}
+.so{position:absolute;transform:translate(-50%,-50%);text-align:center;font-size:26px;transition:.2s;line-height:1}
+.so b{display:block;font-size:15px;font-weight:700;letter-spacing:1px;background:#000a;color:#fff;border-radius:6px;padding:1px 4px;margin-top:2px;min-width:34px;font-family:monospace}
+.so.act{transform:translate(-50%,-50%) scale(1.3);filter:drop-shadow(0 0 8px #ff4);z-index:3}
+.so.act b{background:#fff;color:#c0182c}
+.so.bad b{background:#c0182c;color:#fff}
+.kg{position:absolute;left:50%;bottom:3%;transform:translateX(-50%);font-size:48px}
+.beam{position:absolute;width:6px;background:linear-gradient(#fff,#ff4fd8);box-shadow:0 0 12px 4px #ff4fd8;border-radius:4px;animation:bm .45s forwards;z-index:4}@keyframes bm{to{opacity:0}}
+.tb{position:absolute;top:8px;left:8px;width:42%;height:14px;background:#111;border:2px solid #fff;border-radius:4px;z-index:5;overflow:hidden}.tb i{display:block;height:100%;width:100%;background:#3ccf4e}
+.hh{position:absolute;top:5px;right:8px;z-index:5;font-weight:700;font-size:14px;background:#000a;padding:2px 8px;border-radius:10px}
+.cnt{position:absolute;top:28px;left:8px;font-size:12px;z-index:5;font-weight:700;text-shadow:0 1px 2px #000}
+.brk{position:absolute;left:50%;bottom:14%;transform:translateX(-50%);font-size:52px;animation:up 1s forwards;z-index:6}@keyframes up{to{transform:translate(-50%,-70px);opacity:0}}
+.ir{display:flex;align-items:center;max-width:520px;margin:8px auto 0}.ir input{flex:1;width:auto;margin:4px;text-align:center;font-size:20px;min-width:0}.ir button{margin:4px;padding:12px 14px}
+</style></head><body>
+<button id="menu" onclick="menu()">☰</button><div id="app"></div>
+<script>
+let users={},U=null,G=null,paused=false,pic="";
+try{users=JSON.parse(localStorage.spx||"{}")}catch(e){}
+const save=()=>{try{localStorage.spx=JSON.stringify(users)}catch(e){}};
+const $=s=>document.querySelector(s),app=$("#app"),MIN=25*60000;
+const A=["Word Rookie","Letter Hunter","Brave Typist","Spelling Scout","Quick Fingers","Grammar Knight","Vocab Hero","Sentence Smith","Word Warrior","Typing Captain","Noun Master","Verb Voyager","Adjective Ace","Fluent Falcon","Phrase Pilot","Story Sage","Reading Ranger","Spelling Star","Lightning Typer","Grammar Guardian","Word Wizard","Language Lion","Idiom Idol","Punctuation Pro","Crown Typist","Royal Scholar","Syntax Sultan","Fluency Duke","Knowledge Prince"];
+const T=l=>l>=30?`SPX ${U.name} LEARNED`:A[l-1];
+const W=["abcdefghijklmnopqrstuvwxyz".split(""),["cat","dog","sun","book","tree","fish","milk","bird"],["apple","happy","water","green","school","friend","table","smile"],["is","am","are","was","were","have","has","been","will","can"],["quickly","beautiful","because","through","teacher","morning","library","careful"],["knowledge","fluently","grammar","sentence","question","adventure","language","champion"]];
+const pick=l=>{const a=W[Math.min(5,Math.floor((l-1)/5))];return a[Math.random()*a.length|0]};
+function tick(){if(!U)return;while(U.h<5&&U.n&&Date.now()>=U.n){U.h++;U.n=U.h<5?U.n+MIN:0}if(U.h>=5)U.n=0;save()}
+const fmt=ms=>{const s=Math.max(0,Math.ceil(ms/1000));return String(s/60|0).padStart(2,"0")+":"+String(s%60).padStart(2,"0")};
+const hud=()=>U?`❤️ ${U.h}${U.n&&U.h<5?" ⏳"+fmt(U.n-Date.now()):""} &nbsp; 🪙 ${U.c}`:"";
+setInterval(()=>{tick();document.querySelectorAll(".hb").forEach(e=>e.innerHTML=hud());const t=$("#tm");if(t&&U)t.textContent=U.n?fmt(U.n-Date.now()):"00:00";if(t&&U&&U.h>0){closePop();go("levels")}},1000);
+function pop(h){const p=document.createElement("div");p.className="ov";p.innerHTML=`<div class=pp>${h}</div>`;document.body.append(p)}
+const closePop=()=>document.querySelectorAll(".ov").forEach(e=>e.remove());
+const oops=t=>pop(`<div class=emo>😟</div><h2>${t}</h2><button onclick="closePop()">OK</button>`);
+function noHeart(){pop(`<div class=emo>💔</div><h2>No hearts left!</h2><p>Next heart in</p><h1 id=tm style="font-size:40px">${fmt(U.n-Date.now())}</h1><button onclick="closePop();go('store')">Buy hearts</button><button onclick="closePop()">Wait</button>`)}
+function menu(){paused=true;pop(`<h2>Menu</h2><button onclick="closePop();go('home')">🏠 HOME</button><button onclick="closePop();paused=false">↩ BACK</button>`)}
+function go(s){try{speechSynthesis.cancel()}catch(e){}if(s!="game")G=null;paused=false;closePop();tick();app.innerHTML=V[s]();$("#menu").style.display=U?"block":"none";if(s=="levels")setTimeout(()=>{const c=$(".cur");c&&c.scrollIntoView({block:"center"})},50);if(s=="game")runGame()}
+const av=(u,s)=>u.pic?`<img class=star src="${u.pic}" ${s?`style="width:${s}px;height:${s}px"`:""}>`:`<div class=star ${s?`style="width:${s}px;height:${s}px;font-size:${s/2}px"`:""}>⭐</div>`;
+const V={
+auth:()=>`<h1 style="font-size:32px">SPX LEARN</h1><div class=card><h3>Sign up</h3><label style="cursor:pointer">${'<div class=star id=pv>⭐</div>'}<br>Tap star to add photo<input type=file accept="image/*" hidden onchange="photo(this)"></label><br><input id=nm placeholder="Your unique name"><input id=ag type=number placeholder="Age"><br><button onclick="signup()">Start playing</button></div><div class=card><h3>Login</h3><input id=ln placeholder="Your username"><br><button onclick="login()">Login</button></div>`,
+home:()=>`<div class=hud><span class=hb>${hud()}</span></div>${av(U)}<h2>Hi, ${U.name}!</h2><button class=big onclick="play()">▶ PLAY</button><button class=big onclick="go('store')">🛒 STORE</button><button class=big onclick="go('titles')">🏆 TITLES</button><div class=card>Top coins: 🪙 ${U.c}</div>`,
+levels:()=>{let h=`<div class=hud><span class=hb>${hud()}</span></div><h2>Choose a level</h2><div style="max-width:340px;margin:auto">`;for(let i=1;i<=30;i++){const c=i<U.l?"done":i==U.l?"cur":"lock",x=50+38*Math.sin(i*.9);h+=`<div class="node ${c}" style="margin-left:${x}%;transform:translateX(-50%)" onclick="lvl(${i})">${i}<small>${i<U.l?"✅":i>U.l?"🔒":"⚔️"}</small>${i==U.l?'<span class=king>🤴</span>':""}${i<U.l&&i>U.l-2?"":""}${i%5==0?'<small style="left:-6px;right:auto">🛡️</small>':""}</div>`}return h+"</div>"},
+store:()=>`<div class=hud><span class=hb>${hud()}</span></div><h2>🛒 Store</h2><div class=card>${[[5,2],[15,5],[25,6]].map(p=>`<div class=pack><span>❤️ ${p[0]} hearts</span><button onclick="buy(${p[0]},${p[1]})">₹${p[1]} Buy</button></div>`).join("")}</div><div class=card>🤴 King characters with powers — coming soon!</div>`,
+titles:()=>`<h2>🏆 My titles</h2><div class=card>${U.t.length?U.t.map(t=>`<p>🏅 ${t}</p>`).join(""):"Complete levels to earn titles!"}</div>`,
+game:()=>{const X=[14,32,50,68,86];let o="";for(let k=0;k<10;k++)o+=`<div class=so style="left:${X[k%5]}%;top:${k<5?31:45}%">💂<b>${G.q[k]}</b></div>`;return `<div class=hud><span class=hb>${hud()}</span> &nbsp; Level ${G.l}</div><div id=ar><div class=wall></div><div class=torch style="top:3%;left:22%">🔥</div><div class=torch style="top:3%;right:22%">🔥</div><div class=torch style="top:60%;left:3%">🔥</div><div class=torch style="top:60%;right:3%">🔥</div><div class=boss>👹</div><div class=ring></div><div class=tb><i id=tf></i></div><div class="hh hb">${hud()}</div><div class=cnt id=cn></div>${o}<div class=kg id=kg>🤴</div></div><div class=ir><button id=sp>🔊</button><input id=ti autocomplete=off autocapitalize=off autocorrect=off spellcheck=false placeholder="Type the word you hear"><button id=fi>🔥 Fire</button></div>`}
+};
+function photo(i){const f=i.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement("canvas");c.width=c.height=100;const s=Math.min(im.width,im.height);c.getContext("2d").drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,100,100);pic=c.toDataURL("image/jpeg",.7);$("#pv").outerHTML=`<img id=pv class=star src="${pic}">`};im.src=r.result};r.readAsDataURL(f)}
+function signup(){const n=$("#nm").value.trim(),a=+$("#ag").value;if(!n||!a||a<3||a>99)return oops("Enter a name and your age");const k=n.toLowerCase();if(users[k])return oops("Opps! the name already taken");users[k]=U={name:n,age:a,pic,l:1,c:0,h:5,n:0,t:[]};save();go("home")}
+function login(){const k=$("#ln").value.trim().toLowerCase();if(!users[k])return oops("Opps! username not found");U=users[k];go("home")}
+function play(){tick();U.h<=0?noHeart():go("levels")}
+function lvl(i){if(i>U.l)return;pop(`<h2>Ready soldier ${U.name}! ⚔️</h2><button onclick="closePop();U.h<=0?noHeart():start(${i})">Play the level (${i})</button>`)}
+function buy(n,p){pop(`<h2>Pay ₹${p} for ${n} ❤️</h2><p>Pay in your UPI app, then come back and confirm.</p><button onclick="location.href='upi://pay?pa=magendiranm84@okaxis&pn=SPX%20LEARN&am=${p}&cu=INR&tn=SPX%20hearts'">Open UPI app</button><button onclick="closePop();U.h+=${n};U.n=U.h<5?U.n:0;save();go('store')">I have paid ✔</button><button onclick="closePop()">Cancel</button>`)}
+const WL={2:["is","am","go","up","we","he","me","on","no","so","to","it","in","at","an","by"],3:["cat","dog","sun","run","hat","pen","cup","bed","red","big","sit","bus","pig","map","net"],4:["book","tree","fish","milk","bird","frog","star","moon","cake","ship","door","rain","jump","play"]};
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.rate=.8;speechSynthesis.speak(u)}catch(e){}}
+function start(l){const p4=Math.min(.6,.15+l*.03),p2=Math.max(.1,.45-l*.02),q=[];while(q.length<10){const r=Math.random(),n=r<p2?2:r<p2+p4?4:3,w=WL[n][Math.random()*WL[n].length|0];if(!q.includes(w)||q.length>8)q.push(w)}G={l,q,i:0,tl:15,last:0,over:0,lock:1,run:0};go("game");runGame()}
+function runGame(){if(!G||G.run)return;G.run=1;const ar=$("#ar"),ti=$("#ti");
+$("#fi").onclick=fire;ti.onkeydown=e=>{if(e.key=="Enter")fire()};$("#sp").onclick=()=>{ti.focus();say(`${G.w.length} letter word. ${G.w}`)};
+setTimeout(ask,500);requestAnimationFrame(lp)}
+function ask(){if(!G||G.over)return;if(G.i>=10)return end(1);const e=document.querySelectorAll(".so")[G.i],w=G.q[G.i];G.w=w;G.tl=15;G.lock=0;e.classList.add("act");$("#ti").value="";$("#ti").focus();$("#cn").textContent=`Word ${G.i+1}/10 · ${w.length} letters`;say(`${w.length} letter word. ${w}. ${w}`)}
+function fire(){if(!G||G.lock||G.over||paused)return;const v=$("#ti").value.trim().toLowerCase();if(!v)return;G.lock=1;v==G.w?hit():miss()}
+function hit(){const e=document.querySelectorAll(".so")[G.i],ar=$("#ar"),A=ar.getBoundingClientRect(),K=$("#kg").getBoundingClientRect(),E=e.getBoundingClientRect(),x1=K.left+K.width/2-A.left,y1=K.top-A.top+6,x2=E.left+E.width/2-A.left,y2=E.top+E.height/2-A.top,d=Math.hypot(x2-x1,y2-y1),ang=Math.atan2(x2-x1,-(y2-y1))*180/Math.PI,b=document.createElement("div");b.className="beam";b.style.cssText=`left:${x1-3}px;top:${y1-d}px;height:${d}px;transform-origin:50% 100%;transform:rotate(${ang}deg)`;ar.append(b);setTimeout(()=>{e.innerHTML="💥";setTimeout(()=>e.style.opacity=0,300)},250);G.i++;setTimeout(ask,1000)}
+function miss(){const e=document.querySelectorAll(".so")[G.i],ar=$("#ar");e.classList.add("bad");e.querySelector("b").textContent=G.w;U.h--;if(U.h<5&&!U.n)U.n=Date.now()+MIN;save();document.querySelectorAll(".hb").forEach(x=>x.innerHTML=hud());const h=document.createElement("div");h.className="brk";h.textContent="💔";ar.append(h);ar.classList.add("shk");setTimeout(()=>{ar.classList.remove("shk");h.remove()},1000);G.i++;if(U.h<=0){G.over=1;setTimeout(()=>end(0),1000)}else setTimeout(ask,1300)}
+function lp(ts){if(!G||G.over)return;const dt=Math.min(.1,(ts-(G.last||ts))/1000);G.last=ts;if(!paused&&!G.lock){G.tl-=dt;const f=$("#tf");f.style.width=Math.max(0,G.tl/15*100)+"%";f.style.background=G.tl<5?"#e53935":"#3ccf4e";if(G.tl<=0){G.lock=1;miss()}}requestAnimationFrame(lp)}
+function end(w){const l=G.l;G.over=1;if(!w)return pop(`<div class=emo>😢</div><h2>Oh no! Try again</h2><button onclick="closePop();U.h<=0?noHeart():start(${l})">Try again</button>`);
+let x="";if(l==U.l){U.c+=20;U.t.push(T(l));U.l=l+1;x=`<p>🪙 +20 coins<br>🏅 New title: <b>${T(l)}</b></p>`}save();
+pop(`<div class=emo>😄</div><h2>Super! Awesome! 🎉</h2>${x}${l<30?`<button onclick="closePop();U.h<=0?noHeart():start(${l+1})">Next level</button>`:""}<button onclick="go('levels')">Levels</button>`)}
+(function(){app.innerHTML=`<div class=intro><h1>SPX LEARN</h1><div class=bar><i id=lb></i></div><p id=pc>0%</p></div>`;let p=0;const iv=setInterval(()=>{p++;$("#lb").style.width=p+"%";$("#pc").textContent=p+"%";if(p>=100){clearInterval(iv);go("auth")}},50)})();
+</script></body></html>
